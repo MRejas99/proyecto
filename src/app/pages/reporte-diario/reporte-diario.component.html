@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Contagiados
+            </div>
+            <div class="card-body text-center">
+                <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayDiario">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <h1 *ngIf="hayDiario">{{reporteDiario.contagiados}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Recuperados
+            </div>
+            <div class="card-body text-center">
+                <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayDiario">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <h1 *ngIf="hayDiario">{{reporteDiario.recuperados}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Fallecidos
+            </div>
+            <div class="card-body text-center">
+                <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayDiario">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <h1 *ngIf="hayDiario">{{reporteDiario.fallecidos}}</h1>
+            </div>
+        </div>
+    </div>
+</div>

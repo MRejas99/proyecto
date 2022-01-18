@@ -13,13 +13,17 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { FooterComponent } from './layout/footer/footer.component';
+import { ReporteDiarioComponent } from './pages/reporte-diario/reporte-diario.component';
+import { ReporteSemanalComponent } from './pages/reporte-semanal/reporte-semanal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ReporteDiarioComponent,
+    ReporteSemanalComponent
   ],
   imports: [
     BrowserModule,
