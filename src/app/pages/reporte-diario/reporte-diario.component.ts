@@ -1,3 +1,4 @@
+import { UtilsService } from './../../service/utils.service';
 import { ProyectoService } from './../../service/proyecto.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,35 +13,30 @@ export class ReporteDiarioComponent implements OnInit {
   diario: Observable<any[]>;
   reporteDiario: any;
   hayDiario = false;
-  
-  constructor( private _proyecto: ProyectoService) { 
+  fecha = "";
+
+  constructor( private _proyecto: ProyectoService,
+               private _utils: UtilsService) { 
     
   }
 
   ngOnInit(): void {
-    this.getDiario();
-  }
-
-  getDiario() {
-    this.diario = this._proyecto.getDiario(this.getToday());
+    this.getData();
     setTimeout(() => {
-      this.diario.forEach(element => {
-        this.reporteDiario = element[0];
-        this.hayDiario = true;
-      });
-    }, 300);
+      this.getReporteDiario();
+
+    },300);
   }
 
-  getToday(): String {
-    let date = new Date();
-    let dd = date.getDate();
-    let mm = date.getMonth() + 1;
-    let yy = date.getFullYear();
+  getData() {
+    this.diario = this._proyecto.getReporteDiario();
+  }
 
-    if(mm < 10){
-      return `${dd}/0${mm}/${yy}`;
-    }else{
-      return `${dd}/${mm}/${yy}`;
-    }
+  getReporteDiario() {
+    this.diario.forEach(element => {
+      this.fecha = this._utils.getDateFromTimestamp(element[0].fecha);
+      this.reporteDiario = element[0];
+      this.hayDiario = true;
+    });
   }
 }

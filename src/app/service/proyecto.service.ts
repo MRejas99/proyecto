@@ -12,4 +12,8 @@ export class ProyectoService {
   getDiario(date: String): Observable<any[]> {
     return this.af.collection('diario', ref => ref.where('fecha', '==', date)).valueChanges();
   }
+
+  getReporteDiario(): Observable<any[]> {
+    return this.af.collection('diario', ref => ref.orderBy('fecha', 'desc')).valueChanges();
+  }
 }
