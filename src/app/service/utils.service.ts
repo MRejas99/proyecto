@@ -26,11 +26,21 @@ export class UtilsService {
     let dd = date.getDate();
     let mm = date.getMonth() + 1;
     let yy = date.getFullYear();
+    let hh = date.getHours();
+    let mi = date.getMinutes();
+    let ss = date.getSeconds();
 
+    if(mi < 10) {
+      mi = `0${mi}`;
+    }
+    if(ss < 10) {
+      ss = `0${ss}`;
+    }
+    
     if(mm < 10){
-      return `${dd}/0${mm}/${yy}`;
+      return `${dd}/0${mm}/${yy} ${hh}:${mi}:${ss}`;
     } else{
-      return `${dd}/${mm}/${yy}`;
+      return `${dd}/${mm}/${yy} ${hh}:${mi}:${ss}`;
     }
   }
 

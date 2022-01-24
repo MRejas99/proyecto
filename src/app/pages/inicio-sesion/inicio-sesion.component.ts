@@ -18,6 +18,7 @@ export class InicioSesionComponent implements OnInit {
   pacienteForm: FormGroup;
   latitud = 0;
   longitud = 0;
+  buscando = false;
 
   constructor( private _proyecto: ProyectoService,
                private _utils: UtilsService,
@@ -49,12 +50,15 @@ export class InicioSesionComponent implements OnInit {
   }
 
   verificarPaciente() {
+    this.buscando = true;
     if (this.pacienteForm.invalid) {
       this.toastr.error('Todos los campos son requeridos', 'Ha ocurrido un error');
+      this.buscando = false;
       return;
     }
     if(this.latitud === 0) {
       this.toastr.warning('Es necesario que otorgue los permisos de ubicación', 'Atención');
+      this.buscando = false;
       return;
     }
     else {
@@ -70,6 +74,7 @@ export class InicioSesionComponent implements OnInit {
   }
 
   pacienteAutenticado(ci: string, nac: string) {
+    this.buscando = false;
     this._utils.saveLocalData('ci', ci);
     this._utils.saveLocalData('nac', nac);
     this._utils.alreadyLogin(ci, true);
@@ -91,6 +96,7 @@ export class InicioSesionComponent implements OnInit {
     this._proyecto.getCiExistente(ci).pipe(take(1)).subscribe( p => {
       if (p.length > 0) {
         this.toastr.error('El número de CI ya existe pero no coincide con la fecha de nacimiento', 'Ha ocurrido un error');
+        this.buscando = false;
         return
       }
       else {

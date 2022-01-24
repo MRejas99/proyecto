@@ -1,3 +1,58 @@
 <div class="container">
-    
+    <div class="row col-sm-12 mt-2 mb-2">
+        <div class="card paciente">
+            <div class="card-header">
+                Buscar paciente
+            </div>
+            <div class="card-body">
+                <form [formGroup] = "pacienteForm" (ngSubmit)="buscarPaciente()" autocomplete="off">
+                    <div class="form-group row">
+                        <label for="ci" class="col-sm-4 col-form-label">Número de CI</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ci" formControlName="ci">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="nacimiento" class="col-sm-4 col-form-label">Fecha de Nacimiento</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="nacimiento" formControlName="nacimiento">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-8">
+                            <button type="submit" class="btn btn-success">
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="buscando"></span>
+                                BUSCAR
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row col-sm-12" *ngIf="buscado">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-info">
+                    <tr>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Temperatura</th>
+                        <th class="text-center">SPO2</th>
+                        <th class="text-center">Ritmo cardíaco</th>
+                        <th class="text-center">Ritmo respiratorio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let m of medidas">
+                        <td>{{m.fecha}}</td>
+                        <td class="text-center">{{m.temp}} ºC</td>
+                        <td class="text-center">{{m.spo2}}</td>
+                        <td class="text-center">{{m.card}}</td>
+                        <td class="text-center">{{m.resp}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
