@@ -30,3 +30,7 @@ body {
 .container-fluid {
     margin-bottom: 48px !important;
 }
+#time-left {
+    font-size: 30px;
+    color: #56acf1;
+}

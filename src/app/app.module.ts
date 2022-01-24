@@ -1,3 +1,4 @@
+import { AgmCoreModule } from '@agm/core';
 import { environment } from './../environments/environment.prod';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +16,9 @@ import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/c
 import { FooterComponent } from './layout/footer/footer.component';
 import { ReporteDiarioComponent } from './pages/reporte-diario/reporte-diario.component';
 import { ReporteSemanalComponent } from './pages/reporte-semanal/reporte-semanal.component';
+import { InicioSesionComponent } from './pages/inicio-sesion/inicio-sesion.component';
+import { SintomasComponent } from './pages/sintomas/sintomas.component';
+import { PacientesComponent } from './pages/pacientes/pacientes.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,10 @@ import { ReporteSemanalComponent } from './pages/reporte-semanal/reporte-semanal
     HeaderComponent,
     FooterComponent,
     ReporteDiarioComponent,
-    ReporteSemanalComponent
+    ReporteSemanalComponent,
+    InicioSesionComponent,
+    SintomasComponent,
+    PacientesComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +40,13 @@ import { ReporteSemanalComponent } from './pages/reporte-semanal/reporte-semanal
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      apiKey: 'AIzaSyAHjWLR6UClo4KMMhGa3T8F5iKF4BJes8E',
+      libraries: ['visualization'],
+    })
   ],
   providers: [
     {

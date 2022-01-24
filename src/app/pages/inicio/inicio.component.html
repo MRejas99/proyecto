@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <h4 class="text-center col-sm-12">Bienvebido al sistema</h4>
+        <h3 class="text-center col-sm-12">BIENVENIDOS AL SISTEMA</h3>
         <div class="row col-md-12">
             <div class="col-md-6">
                 <app-reporte-diario></app-reporte-diario>
@@ -8,7 +8,37 @@
                 <app-reporte-semanal></app-reporte-semanal>
             </div>
             <div class="col-md-6">
-                algo
+                <h4>Mapa de calor de casos positivos</h4>
+                <agm-map 
+                    [latitude]="lat"
+                    [longitude]="lng"
+                    [zoom]="zoom"
+                    [disableDefaultUI]="false"
+                    [zoomControl]="false"
+                    (mapReady)="onMapLoad($event)">
+
+                    <!--agm-marker 
+                        *ngFor="let m of markers; let i = index"
+                        (markerClick)="clickedMarker(m.label, i)"
+                        [latitude]="m.lat"
+                        [longitude]="m.lng"
+                        [label]="m.label"
+                        [markerDraggable]="m.draggable">
+                        
+                        <agm-info-window>
+                        <strong>InfoWindow content</strong>
+                        </agm-info-window>
+                        
+                    </agm-marker>
+                    
+                    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
+                        [radius]="5000"
+                        [fillColor]="'red'"
+                        [circleDraggable]="true"
+                        [editable]="true">
+                    </agm-circle-->
+
+                </agm-map>
             </div>
         </div>
     </div>

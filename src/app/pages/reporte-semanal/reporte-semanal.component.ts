@@ -21,7 +21,7 @@ export class ReporteSemanalComponent implements OnInit {
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartType: ChartType = 'line';
+  barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 
