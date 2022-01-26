@@ -13,11 +13,12 @@ export class ReporteDiarioComponent implements OnInit {
   diario: Observable<any[]>;
   reporteDiario: any;
   hayDiario = false;
+  hayContagiados = false;
   fecha = "";
 
   constructor( private _proyecto: ProyectoService,
                private _utils: UtilsService) { 
-    
+    this.getContagiadosHoy();
   }
 
   ngOnInit(): void {
@@ -37,6 +38,16 @@ export class ReporteDiarioComponent implements OnInit {
       this.fecha = this._utils.getDateFromTimestamp(element[0].fecha);
       this.reporteDiario = element[0];
       this.hayDiario = true;
+    });
+  }
+
+  getContagiadosHoy() {
+    let now = new Date();
+    let lastMidnight = now.setHours(0,0,0,0);
+    console.log('hoy', lastMidnight);
+    this._proyecto.getContagiadosFecha(lastMidnight, new Date()).subscribe( cont => {
+      console.log(cont);
+      this.hayContagiados = true;
     });
   }
 }

@@ -48,4 +48,9 @@ export class ProyectoService {
   updateEstado(id: string, estado: any) {
     return this.af.collection('pacientes').doc(id).update({estado: estado});
   }
+
+  getContagiadosFecha(medianoche: any, fecha: any) {
+    console.log('fecha',fecha);
+    return this.af.collection('pacientes', ref => ref.where('estado', '==', 'CONTAGIADO').where('fecha', '>', medianoche)).valueChanges();
+  }
 }

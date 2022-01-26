@@ -93,6 +93,7 @@ export class InicioSesionComponent implements OnInit {
     this.registroForm.removeControl('confirmar');
     this.registroForm.value.latitud = this.latitud;
     this.registroForm.value.longitud = this.longitud;
+    this.registroForm.value.fecha = this._utils.getTodayTimestamp();
     if (this.registroForm.value.pcr == true || this.registroForm.value.antigeno == true) {
       this.registroForm.value.estado = "CONTAGIADO";
     }

@@ -55,7 +55,7 @@ export class ReporteSemanalComponent implements OnInit {
       this.clearChartData();
 
       for (let i = 0; i < limit; i++) {
-        this.barChartLabels.push(this._utils.getDateFromTimestamp(element[i].fecha));
+        this.barChartLabels.push(this._utils.getDayFromTimestamp(element[i].fecha));
         this.contagiados.push(element[i].contagiados);
         this.recuperados.push(element[i].recuperados);
         this.fallecidos.push(element[i].fallecidos);
