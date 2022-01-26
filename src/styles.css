@@ -37,3 +37,7 @@ body {
 .paciente {
     margin: 0 auto;
 }
+.anounce {
+    font-weight: lighter;
+    font-size: 12px;
+}
