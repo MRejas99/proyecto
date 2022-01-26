@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { UtilsService } from './../../service/utils.service';
 import { ProyectoService } from './../../service/proyecto.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 
@@ -14,17 +13,22 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./sintomas.component.css']
 })
 export class SintomasComponent implements OnInit {
-  capturando = false;
-  tiempoRestante: number = 15;
-  intervalo;
-  paciente = '';
-  sintomasForm: FormGroup;
+  cargado = false;
+  estadoForm: FormGroup;
+  
+  t = 0;
+  s = 0;
+  c = 0;
+  r = 0;
 
   medidas: Observable<any[]>;
   temp: any[] = [];
   spo2: any[] = [];
   card: any[] = [];
   resp: any[] = [];
+
+  id = '';
+  cambiando = false;
 
   barChartLabels: Label[] = [];
   barChartOptions: ChartOptions = {
@@ -43,15 +47,12 @@ export class SintomasComponent implements OnInit {
 
   constructor( private _proyecto: ProyectoService, 
                private _utils: UtilsService,
-               private fb: FormBuilder,
                private toastr: ToastrService,
-               private router: Router) { 
-    this.sintomasForm = this.fb.group({
-      temperatura: ['', Validators.required],
-      spo2: ['', Validators.required],
-      cardiaco: ['', Validators.required],
-      respiratorio: ['', Validators.required]
-    });     
+               private fb: FormBuilder) {
+    this.estadoForm = this.fb.group({
+      estado: ['', Validators.required]
+    });  
+    this.getPaciente();   
   }
 
   ngOnInit(): void {
@@ -59,37 +60,6 @@ export class SintomasComponent implements OnInit {
     setTimeout(() => {
       this.getMediciones();
     }, 500);
-  }
-
-  iniciarCaptura() {
-    this.capturando = true;
-    this.tiempoRestante = 15;
-    this.intervalo = setInterval(() => {
-      if(this.tiempoRestante > 0) {
-        this.tiempoRestante--;
-      } else {
-        this.guardarCaptura();
-        this.tiempoRestante = 15;
-      }
-    },1000)
-  }
-
-  detenerCaptura() {
-    this.capturando = false;
-    clearInterval(this.intervalo);
-  }
-
-  guardarCaptura() {
-    this.paciente = this._utils.getLocalData('ci');
-    if (this.paciente !== '') {
-      this.sintomasForm.value.paciente = this._utils.getLocalData('ci');
-      this.sintomasForm.value.fecha = this._utils.getTodayTimestamp();
-      this._proyecto.postMediciones(this.sintomasForm.value);
-    }
-    else {
-      this.toastr.warning('Inicie sesión nuevamente', 'Sesión finalizada');
-      this.router.navigateByUrl('/login');
-    }
   }
 
   getData() {
@@ -103,7 +73,10 @@ export class SintomasComponent implements OnInit {
         limit = element.length;
       }
       this.clearChartData();
-
+      this.t = element[0].temperatura;
+      this.s = element[0].spo2;
+      this.c = element[0].cardiaco;
+      this.r = element[0].respiratorio;
       for (let i = 0; i < limit; i++) {
         this.barChartLabels.push(this._utils.getDateFromTimestamp(element[i].fecha));
         this.temp.push(element[i].temperatura);
@@ -116,10 +89,34 @@ export class SintomasComponent implements OnInit {
       this.spo2.reverse();
       this.card.reverse();
       this.resp.reverse();
+      this.cargado = true;
     });
   }
 
   clearChartData() {
     this.barChartLabels = [];
+  }
+
+  getPaciente() {
+    this._proyecto.getPacientePorEmail(this._utils.getLocalData('email')).subscribe( p => {
+      if (p.length > 0) {
+        this.id = p[0].id;
+        this.estadoForm = this.fb.group({
+          estado: [p[0].estado, Validators.required]
+        }); 
+      }
+    });
+  }
+
+  cambiarEstado() {
+    this.cambiando = true;
+    if(this.estadoForm.invalid) {
+      this.toastr.error('Debe seleccionar el estado al que desea cambiar', 'Error');
+      return;
+    }
+    this._proyecto.updateEstado(this.id, this.estadoForm.value.estado).then( c => {
+      this.toastr.success('Estado cambiado a ' + this.estadoForm.value.estado, 'Operación existosa');
+      this.cambiando = false;
+    })
   }
 }

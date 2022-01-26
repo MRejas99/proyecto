@@ -27,6 +27,6 @@ export class HeaderComponent implements OnInit {
   }
 
   pacienteAutenticado() {
-    this.ciPaciente = this._utils.getLocalData('ci');
+    this.ciPaciente = this._utils.getLocalData('email');
   }
 }

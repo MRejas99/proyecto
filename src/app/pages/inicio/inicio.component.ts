@@ -21,50 +21,12 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
-
-  /*clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
-  }*/
-  
-  /*mapClicked($event: MouseEvent) {
-    this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng,
-      draggable: true
-    });
-  }*/
-  
-  /*markerDragEnd(m: marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
-  }
-  
-  markers: marker[] = [
-	  {
-		  lat: 51.673858,
-		  lng: 7.815982,
-		  label: 'A',
-		  draggable: true
-	  },
-	  {
-		  lat: 51.373858,
-		  lng: 7.215982,
-		  label: 'B',
-		  draggable: false
-	  },
-	  {
-		  lat: 51.723858,
-		  lng: 7.895982,
-		  label: 'C',
-		  draggable: true
-	  }
-  ]*/
 
   onMapLoad(mapInstance: google.maps.Map) {
     this.map = mapInstance;
     const coords: google.maps.LatLng[] = [];
 
-    this.pacientes = this._proyecto.getPacientes();
+    this.pacientes = this._proyecto.getPacientesEstado("CONTAGIADO");
     setTimeout(() => {
       this.pacientes.forEach(element => {
         for (let i = 0; i < element.length; i++) {
@@ -76,12 +38,6 @@ export class InicioComponent implements OnInit {
       });
       });
     }, 400);
-
-    //const coords: google.maps.LatLng[] = [new google.maps.LatLng(-16.4957706,-68.14333)]; // can also be a google.maps.MVCArray with LatLng[] inside    
-    /*this.heatmap = new google.maps.visualization.HeatmapLayer({
-        map: this.map,
-        data: coords
-    });*/
   }
   
 }

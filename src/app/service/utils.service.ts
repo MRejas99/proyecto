@@ -11,14 +11,14 @@ export class UtilsService {
   private logged = new BehaviorSubject(false);
   isLoggedIn = this.logged.asObservable();
 
-  private ci = new BehaviorSubject('');
-  ciLoggedIn = this.ci.asObservable();
+  private email = new BehaviorSubject('');
+  ciLoggedIn = this.email.asObservable();
 
   constructor() { }
 
-  alreadyLogin(ci: string, sesion: boolean) {
+  alreadyLogin(email: string, sesion: boolean) {
     this.logged.next(sesion);
-    this.ci.next(ci);
+    this.email.next(email);
   }
 
   getDateFromTimestamp (timestamp): string {
@@ -70,6 +70,6 @@ export class UtilsService {
   }
 
   clearLocalStorage() {
-    localStorage.clear;
+    localStorage.clear();
   }
 }

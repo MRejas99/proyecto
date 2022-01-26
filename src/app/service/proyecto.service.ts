@@ -17,6 +17,10 @@ export class ProyectoService {
     return this.af.collection('pacientes', ref => ref.where('ci', '==', form.ci).where('nacimiento', '==', form.nacimiento)).valueChanges();
   }
 
+  getPacientePorEmail(email: string): Observable<any[]> {
+    return this.af.collection('pacientes', ref => ref.where('email', '==', email)).valueChanges({idField: 'id'});
+  }
+
   getCiExistente(ci: string): Observable<any[]>  {
     return this.af.collection('pacientes', ref => ref.where('ci', '==', ci)).valueChanges();
   }
@@ -35,5 +39,13 @@ export class ProyectoService {
 
   getPacientes(): Observable<any[]> {
     return this.af.collection('pacientes').valueChanges();
+  }
+
+  getPacientesEstado(estado: string): Observable<any[]> {
+    return this.af.collection('pacientes', ref => ref.where('estado', '==', estado)).valueChanges();
+  }
+
+  updateEstado(id: string, estado: any) {
+    return this.af.collection('pacientes').doc(id).update({estado: estado});
   }
 }

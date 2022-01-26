@@ -6,45 +6,76 @@
                     Registro de síntomas
                 </div>
                 <div class="card-body">
-                    <form [formGroup] = "sintomasForm">
-                        <div class="form-group row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-6">
-                                <button type="button" class="btn btn-success" (click)="iniciarCaptura()" *ngIf="!capturando">INICIAR CAPTURA</button>
-                                <button type="button" class="btn btn-danger" (click)="detenerCaptura()" *ngIf="capturando">DETENER CAPTURA</button>
-                            </div>
-                            <div class="col-sm-3 text-right" *ngIf="capturando"><span id="time-left">{{tiempoRestante}}</span></div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="temperatura" class="col-sm-3 col-form-label">Temperatura</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="temperatura" formControlName="temperatura">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="spo2" class="col-sm-3 col-form-label">SPO2</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="spo2" formControlName="spo2">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="cardiaco" class="col-sm-3 col-form-label">Ritmo cardíaco</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="cardiaco" formControlName="cardiaco">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="respiratorio" class="col-sm-3 col-form-label">Ritmo respiratorio</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="respiratorio" formControlName="respiratorio">
-                            </div>
-                        </div>
+                    <form class="form-inline" [formGroup] = "estadoForm" (ngSubmit)="cambiarEstado()">
+                        <label class="my-1 mr-2" for="estado">Cambiar estado</label>
+                        <select class="custom-select my-1 mr-sm-2" id="estado" formControlName="estado">
+                            <option selected>Seleccione...</option>
+                            <option value="CONTAGIADO">CONTAGIADO</option>
+                            <option value="RECUPERADO">RECUPERADO</option>
+                            <option value="FALLECIDO">FALLECIDO</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary my-1">CAMBIAR</button>
                     </form>
+                    <h3 class="mt-2">Medidas capturadas</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mt-2">
+                                <div class="card-header">
+                                    Temperatura
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!cargado">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <h3 *ngIf="cargado">{{t}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mt-2">
+                                <div class="card-header">
+                                    SPO2
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!cargado">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <h3 *ngIf="cargado">{{s}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mt-2">
+                                <div class="card-header">
+                                    Ritmo cardíaco
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!cargado">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <h3 *ngIf="cargado">{{c}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mt-2">
+                                <div class="card-header">
+                                    Ritmo respiratorio
+                                </div>
+                                <div class="card-body text-center">
+                                    <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!cargado">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <h3 *ngIf="cargado">{{r}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mt-4">
             Medidas tomadas
             <div class="chart-wrapper">
                 <canvas baseChart 
