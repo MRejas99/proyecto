@@ -20,6 +20,7 @@ import { ReporteSemanalComponent } from './pages/reporte-semanal/reporte-semanal
 import { InicioSesionComponent } from './pages/inicio-sesion/inicio-sesion.component';
 import { SintomasComponent } from './pages/sintomas/sintomas.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
+import { SinRegistroComponent } from './pages/sin-registro/sin-registro.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PacientesComponent } from './pages/pacientes/pacientes.component';
     ReporteSemanalComponent,
     InicioSesionComponent,
     SintomasComponent,
-    PacientesComponent
+    PacientesComponent,
+    SinRegistroComponent
   ],
   imports: [
     BrowserModule,

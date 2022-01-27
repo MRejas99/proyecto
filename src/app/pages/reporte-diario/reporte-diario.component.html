@@ -1,4 +1,4 @@
-<h5 class="mt-4">Reporte de fecha {{fecha}}</h5>
+<p class="mt-4">Reporte de fecha {{fecha}}</p>
 <div class="row">
     <div class="col-md-4">
         <div class="card">
@@ -9,7 +9,7 @@
                 <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayDiario">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <h3 *ngIf="hayDiario">{{reporteDiario.contagiados}}</h3>
+                <h5 *ngIf="hayDiario">{{reporteDiario.contagiados}}</h5>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayDiario">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <h3 *ngIf="hayDiario">{{reporteDiario.recuperados}}</h3>
+                <h5 *ngIf="hayDiario">{{reporteDiario.recuperados}}</h5>
             </div>
         </div>
     </div>
@@ -35,13 +35,13 @@
                 <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayDiario">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <h3 *ngIf="hayDiario">{{reporteDiario.fallecidos}}</h3>
+                <h5 *ngIf="hayDiario">{{reporteDiario.fallecidos}}</h5>
             </div>
         </div>
     </div>
 </div>
 
-<h5 class="mt-4">Reporte del sistema {{fecha}}</h5>
+<p class="mt-4">Reporte del sistema {{fecha}}</p>
 <div class="row">
     <div class="col-md-4">
         <div class="card">
@@ -52,7 +52,7 @@
                 <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayContagiados">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <h3 *ngIf="hayDiario">0</h3>
+                <h5 *ngIf="hayContagiados">{{contagiadosSistema}}</h5>
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
                 <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayContagiados">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <h3 *ngIf="hayDiario">0</h3>
+                <h5 *ngIf="hayRecuperados">{{recuperadosSistema}}</h5>
             </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
                 <div class="spinner-grow text-info" style="width: 3rem; height: 3rem;" role="status" *ngIf="!hayContagiados">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <h3 *ngIf="hayDiario">0</h3>
+                <h5 *ngIf="hayFallecidos">{{fallecidosSistema}}</h5>
             </div>
         </div>
     </div>

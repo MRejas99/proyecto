@@ -66,6 +66,7 @@ export class PacientesComponent implements OnInit {
       }
       else {
         this.toastr.error('Revise los datos ingresados', 'Paciente inexistente');
+        this.buscando = false;
         return;
       }
     })

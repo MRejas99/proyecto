@@ -4,11 +4,11 @@
         <div class="row col-md-12">
             <div class="col-md-6">
                 <app-reporte-diario></app-reporte-diario>
-                <h5 class="mt-4">Reporte semanal</h5>
+                <p class="mt-4">Reporte semanal</p>
                 <app-reporte-semanal></app-reporte-semanal>
             </div>
             <div class="col-md-6">
-                <h4>Mapa de calor de casos positivos</h4>
+                <p class="mt-4">Mapa de calor de casos positivos</p>
                 <agm-map 
                     [latitude]="lat"
                     [longitude]="lng"
@@ -16,27 +16,6 @@
                     [disableDefaultUI]="false"
                     [zoomControl]="false"
                     (mapReady)="onMapLoad($event)">
-
-                    <!--agm-marker 
-                        *ngFor="let m of markers; let i = index"
-                        (markerClick)="clickedMarker(m.label, i)"
-                        [latitude]="m.lat"
-                        [longitude]="m.lng"
-                        [label]="m.label"
-                        [markerDraggable]="m.draggable">
-                        
-                        <agm-info-window>
-                        <strong>InfoWindow content</strong>
-                        </agm-info-window>
-                        
-                    </agm-marker>
-                    
-                    <agm-circle [latitude]="lat + 0.3" [longitude]="lng" 
-                        [radius]="5000"
-                        [fillColor]="'red'"
-                        [circleDraggable]="true"
-                        [editable]="true">
-                    </agm-circle-->
 
                 </agm-map>
             </div>

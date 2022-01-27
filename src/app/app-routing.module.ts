@@ -4,6 +4,7 @@ import { InicioSesionComponent } from './pages/inicio-sesion/inicio-sesion.compo
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
+import { SinRegistroComponent } from './pages/sin-registro/sin-registro.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'pacientes',
     component: PacientesComponent
+  },
+  {
+    path: 'sin-registro',
+    component: SinRegistroComponent
   },
 ];
 

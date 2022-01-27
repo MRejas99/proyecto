@@ -13,19 +13,25 @@ export class ReporteDiarioComponent implements OnInit {
   diario: Observable<any[]>;
   reporteDiario: any;
   hayDiario = false;
+  contagiadosSistema = 0;
+  recuperadosSistema = 0;
+  fallecidosSistema = 0;
   hayContagiados = false;
+  hayRecuperados = false;
+  hayFallecidos = false;
   fecha = "";
 
   constructor( private _proyecto: ProyectoService,
                private _utils: UtilsService) { 
     this.getContagiadosHoy();
+    this.getRecuperadosHoy();
+    this.getFallecidosHoy();
   }
 
   ngOnInit(): void {
     this.getData();
     setTimeout(() => {
       this.getReporteDiario();
-
     },300);
   }
 
@@ -35,19 +41,30 @@ export class ReporteDiarioComponent implements OnInit {
 
   getReporteDiario() {
     this.diario.forEach(element => {
-      this.fecha = this._utils.getDateFromTimestamp(element[0].fecha);
+      this.fecha = this._utils.getStringDateFromTimestamp(element[0].fecha);
       this.reporteDiario = element[0];
       this.hayDiario = true;
     });
   }
 
   getContagiadosHoy() {
-    let now = new Date();
-    let lastMidnight = now.setHours(0,0,0,0);
-    console.log('hoy', lastMidnight);
-    this._proyecto.getContagiadosFecha(lastMidnight, new Date()).subscribe( cont => {
-      console.log(cont);
+    this._proyecto.getEstadoFecha("CONTAGIADO", this._utils.getTimestampDate()).subscribe( cont => {
+      this.contagiadosSistema = cont.length;
       this.hayContagiados = true;
+    });
+  }
+
+  getRecuperadosHoy() {
+    this._proyecto.getEstadoFecha("RECUPERADO", this._utils.getTimestampDate()).subscribe( cont => {
+      this.recuperadosSistema = cont.length;
+      this.hayRecuperados = true;
+    });
+  }
+
+  getFallecidosHoy() {
+    this._proyecto.getEstadoFecha("FALLECIDO", this._utils.getTimestampDate()).subscribe( cont => {
+      this.fallecidosSistema = cont.length;
+      this.hayFallecidos = true;
     });
   }
 }

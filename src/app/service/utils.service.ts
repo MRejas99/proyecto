@@ -58,6 +58,19 @@ export class UtilsService {
     return dd;
   }
 
+  getStringDateFromTimestamp (timestamp): string {
+    var date = timestamp.toDate();
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1;
+    let yy = date.getFullYear();
+    
+    if(mm < 10){
+      return `${dd}/0${mm}/${yy}`;
+    } else{
+      return `${dd}/${mm}/${yy}`;
+    }
+  }
+
   getToday(): string {
     let date = new Date();
     let dd = date.getDate();
@@ -73,6 +86,14 @@ export class UtilsService {
 
   getTodayTimestamp() {
     return Timestamp.fromDate(new Date());
+  }
+
+  getTimestampDate() {
+    let now = new Date();
+    now.setHours(0);
+    now.setMinutes(0);
+    now.setSeconds(0);
+    return now;
   }
 
   saveLocalData(key: string, value: string) {

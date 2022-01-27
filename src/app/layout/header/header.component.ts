@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   ciPaciente = '';
   sesionIniciada = false;
+  usuarioAutorizado = false;
 
   constructor( private _utils: UtilsService,
                private router: Router ) { 

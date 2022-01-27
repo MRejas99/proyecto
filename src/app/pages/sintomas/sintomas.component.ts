@@ -114,7 +114,7 @@ export class SintomasComponent implements OnInit {
       this.toastr.error('Debe seleccionar el estado al que desea cambiar', 'Error');
       return;
     }
-    this._proyecto.updateEstado(this.id, this.estadoForm.value.estado).then( c => {
+    this._proyecto.updateEstado(this.id, this.estadoForm.value.estado, this._utils.getTodayTimestamp()).then( c => {
       this.toastr.success('Estado cambiado a ' + this.estadoForm.value.estado, 'Operación existosa');
       this.cambiando = false;
     })

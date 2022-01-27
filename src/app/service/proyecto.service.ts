@@ -42,15 +42,18 @@ export class ProyectoService {
   }
 
   getPacientesEstado(estado: string): Observable<any[]> {
-    return this.af.collection('pacientes', ref => ref.where('estado', '==', estado)).valueChanges();
+    return this.af.collection('pacientes', ref => ref.where('estado', '==', estado)).valueChanges({idField: 'id'});
   }
 
-  updateEstado(id: string, estado: any) {
-    return this.af.collection('pacientes').doc(id).update({estado: estado});
+  updateEstado(id: string, estado: any, fecha: any) {
+    return this.af.collection('pacientes').doc(id).update({estado: estado, fecha: fecha});
   }
 
-  getContagiadosFecha(medianoche: any, fecha: any) {
-    console.log('fecha',fecha);
-    return this.af.collection('pacientes', ref => ref.where('estado', '==', 'CONTAGIADO').where('fecha', '>', medianoche)).valueChanges();
+  getEstadoFecha(estado: string, medianoche: any) {
+    return this.af.collection('pacientes', ref => ref.where('estado', '==', estado).where('fecha', '>', medianoche)).valueChanges();
+  }
+
+  getMedicionesHaceDosDias(ci: string, fecha: any): Observable<any[]> {
+    return this.af.collection('medidas', ref => ref.where('paciente', '==', ci).where('fecha', '>', fecha)).valueChanges();
   }
 }
